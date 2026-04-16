@@ -1,0 +1,88 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Stores user preferences and profile data.",
+      "type": "object",
+      "properties": {
+        "displayName": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "photoURL": { "type": "string" },
+        "theme": { "type": "string", "enum": ["dark", "light", "cyberpunk", "silver"] },
+        "font": { "type": "string" },
+        "aiStyle": { "type": "string", "enum": ["formal", "casual", "creative"] },
+        "language": { "type": "string" }
+      },
+      "required": ["email"]
+    },
+    "ChatSession": {
+      "title": "Chat Session",
+      "description": "A session containing a series of messages.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "lastMessage": { "type": "string" }
+      },
+      "required": ["title", "createdAt"]
+    },
+    "ChatMessage": {
+      "title": "Chat Message",
+      "description": "A single message in a chat session.",
+      "type": "object",
+      "properties": {
+        "role": { "type": "string", "enum": ["user", "assistant"] },
+        "content": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "attachments": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["role", "content", "timestamp"]
+    },
+    "Project": {
+      "title": "Coding Project",
+      "description": "A project containing multiple files.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "createdAt"]
+    },
+    "File": {
+      "title": "Project File",
+      "description": "A file within a project.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "content": { "type": "string" },
+        "language": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "content", "language"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile document"
+    },
+    "/users/{userId}/chats/{chatId}": {
+      "schema": "ChatSession",
+      "description": "Chat sessions for a user"
+    },
+    "/users/{userId}/chats/{chatId}/messages/{messageId}": {
+      "schema": "ChatMessage",
+      "description": "Messages within a chat session"
+    },
+    "/users/{userId}/projects/{projectId}": {
+      "schema": "Project",
+      "description": "Coding projects for a user"
+    },
+    "/users/{userId}/projects/{projectId}/files/{fileId}": {
+      "schema": "File",
+      "description": "Files within a project"
+    }
+  }
+}
