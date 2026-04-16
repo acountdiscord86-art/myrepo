@@ -1,0 +1,13 @@
+{
+  "name": "RyeenzyAI",
+  "description": "A futuristic AI assistant and coding platform with 3D interactive UI, real-time chat, and integrated IDE.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "AI Chat",
+    "Coding IDE",
+    "3D Interactive UI"
+  ]
+}
