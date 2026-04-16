@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --color-silver: #c0c0c0;
+  
+  --color-accent: var(--accent-color, #c0c0c0);
+}
+
+[data-theme="silver"] { --accent-color: #c0c0c0; }
+[data-theme="cyberpunk"] { --accent-color: #ff00ff; }
+[data-theme="emerald"] { --accent-color: #10b981; }
+[data-theme="nebula"] { --accent-color: #4f46e5; }
+[data-theme="dark"] { --accent-color: #ffffff; }
+
+@layer base {
+  body {
+    @apply bg-[#050505] text-white antialiased;
+  }
+}
+
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-white/10 rounded-full hover:bg-white/20 transition-colors;
+  }
+  
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Glassmorphism utility - Updated for Black & Silver concept */
+.glass {
+  @apply bg-black/60 backdrop-blur-2xl border border-white/5 shadow-[0_0_20px_rgba(0,0,0,0.5)];
+}
+
+.silver-border {
+  @apply border border-silver/20 hover:border-silver/40 transition-all;
+}
+
+.robot-card {
+  @apply bg-black/40 backdrop-blur-md border border-white/5 rounded-2xl overflow-hidden hover:bg-black/60 transition-all;
+}
+
+/* Custom Chat Bubbles - High Quality Styles */
+.bubble-modern {
+  @apply bg-accent/20 border border-accent/30 text-white shadow-[0_10px_30px_rgba(0,0,0,0.15)] ring-1 ring-white/10;
+}
+
+.bubble-bot-modern {
+  @apply bg-white/5 border border-white/10 text-silver/90 shadow-[0_4px_20px_rgba(0,0,0,0.4)] ring-1 ring-white/5;
+}
+
+.bubble-glass {
+  @apply backdrop-blur-3xl bg-white/5 border border-white/20 shadow-[0_10px_40px_rgba(0,0,0,0.5)] ring-1 ring-white/10;
+}
+
+.bubble-minimal {
+  @apply bg-white/5 border-none shadow-none text-silver/80;
+}
+
+.bubble-minimal-user {
+  @apply bg-accent/10 border-none shadow-none text-white;
+}
+
+.bubble-cyber {
+  @apply bg-black/40 border border-accent/40 text-accent shadow-[0_0_20px_rgba(var(--accent-color),0.2)] transition-all;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
+}
+
+.bubble-bot-cyber {
+  @apply bg-white/5 border border-white/20 text-silver shadow-[0_0_15px_rgba(255,255,255,0.05)];
+  clip-path: polygon(12px 0, 100% 0, 100% 100%, 0 100%, 0 12px);
+}
+
+.bubble-neo {
+  @apply bg-gradient-to-br from-accent/30 to-accent/5 backdrop-blur-md border border-white/20 rounded-3xl text-white shadow-2xl;
+}
+
+.bubble-bot-neo {
+  @apply bg-gradient-to-br from-white/10 to-transparent backdrop-blur-md border border-white/10 rounded-3xl text-silver/80 shadow-xl;
+}
+
+/* Background Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(2deg); }
+}
+
+.animate-float {
+  animation: float 10s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.3; filter: blur(100px); }
+  50% { opacity: 0.6; filter: blur(140px); }
+}
+
+.bg-pulse-glow {
+  animation: pulse-glow 8s ease-in-out infinite;
+}
+
+@keyframes scan {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(100vh); }
+}
+
+/* Prose overrides for Markdown */
+.prose pre {
+  @apply bg-black/40 border border-white/5 rounded-xl p-4 my-4 overflow-x-auto;
+}
+.prose code {
+  @apply font-mono text-silver bg-white/5 px-1.5 py-0.5 rounded text-sm;
+}
+.prose p {
+  @apply mb-4 last:mb-0;
+}
+
